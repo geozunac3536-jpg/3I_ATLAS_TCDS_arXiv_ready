@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TCDS — Predicción post-perihelio para 3I/ATLAS</title>
+  <meta name="description" content="Predicción falsable TCDS para 3I/ATLAS: fotometría, espectroscopía y dinámica post-perihelio." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --panel: #111723;
+      --card: #0f1622;
+      --text: #d7e1ec;
+      --muted: #8aa0b5;
+      --brand: #4cc2ff;
+      --accent: #8de1ff;
+      --good: #56f39a;
+      --warn: #ffd166;
+      --bad: #ff6b6b;
+      --border: #1b2636;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0; background: radial-gradient(1200px 800px at 15% -10%, #142034 0%, var(--bg) 55%), var(--bg);
+      color: var(--text); font: 16px/1.6 Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, sans-serif;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 32px 20px 80px; }
+    header {
+      display: grid; gap: 16px; margin: 12px 0 24px;
+    }
+    .title {
+      display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    }
+    h1 {
+      margin: 0; font-size: 34px; line-height: 1.15; font-weight: 800; letter-spacing: .2px;
+      background: linear-gradient(90deg, #e6f3ff 0%, #9ad6ff 60%, #c2f1ff 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .badges { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .badge img { height: 24px; display: block; border-radius: 6px; box-shadow: var(--shadow); }
+    .panel {
+      background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0)) , var(--panel);
+      border: 1px solid var(--border); border-radius: var(--radius); padding: 18px 18px; box-shadow: var(--shadow);
+    }
+    .grid {
+      display: grid; gap: 18px; grid-template-columns: repeat(12, 1fr);
+    }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+    .card h3 { margin: 6px 0 8px; font-size: 18px; }
+    .muted { color: var(--muted); }
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px; padding: 11px 16px; border-radius: 12px;
+      background: linear-gradient(180deg, #1a2a3d, #132236); border: 1px solid #1e2e43; color: #dff2ff;
+      text-decoration: none; font-weight: 600; box-shadow: var(--shadow);
+    }
+    .btn:hover { filter: brightness(1.1); text-decoration: none; }
+    .btn .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--brand); box-shadow: 0 0 12px var(--brand); }
+    .kpi { font-weight: 700; color: var(--good); }
+    .list { padding-left: 18px; margin: 6px 0; }
+    footer { margin-top: 36px; font-size: 13px; color: var(--muted); }
+    code, pre { background: #0a1220; border: 1px solid #152238; border-radius: 10px; padding: 2px 6px; }
+    /* layout */
+    .col-8 { grid-column: span 8; }
+    .col-4 { grid-column: span 4; }
+    .col-6 { grid-column: span 6; }
+    .hero {
+      display: grid; gap: 18px; grid-template-columns: 1.2fr .8fr; align-items: stretch; margin-bottom: 18px;
+    }
+    @media (max-width: 880px) {
+      .hero { grid-template-columns: 1fr; }
+      .col-8, .col-4, .col-6 { grid-column: 1 / -1; }
+    }
+  </style>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": "TCDS — Predicción post-perihelio para 3I/ATLAS",
+    "creator": {
+      "@type": "Person",
+      "name": "Genaro Carrasco Ozuna",
+      "identifier": "https://orcid.org/0009-0005-6358-9910",
+      "affiliation": "Proyecto TCDS / MSL, México"
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "identifier": "https://doi.org/10.5281/zenodo.17560070",
+    "sameAs": ["https://doi.org/10.5281/zenodo.17560070"],
+    "about": ["TCDS","3I/ATLAS","Sigma field","predicción post-perihelio"]
+  }
+  </script>
+</head>
+<body>
+  <div class="wrap">
+    <header class="panel">
+      <div class="title">
+        <h1>TCDS — Predicción post-perihelio para 3I/ATLAS</h1>
+      </div>
+      <div class="badges">
+        <a class="badge" href="https://doi.org/10.5281/zenodo.17560070" target="_blank" rel="noopener">
+          <img alt="DOI 10.5281/zenodo.17560070" src="https://zenodo.org/badge/DOI/10.5281/zenodo.17560070.svg" />
+        </a>
+        <a class="badge" href="https://orcid.org/0009-0005-6358-9910" target="_blank" rel="noopener">
+          <img alt="ORCID" src="https://img.shields.io/badge/ORCID-0009--0005--6358--9910-green" />
+        </a>
+        <a class="badge" href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">
+          <img alt="CC BY 4.0" src="https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg" />
+        </a>
+        <a class="badge" href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">
+          <img alt="MIT" src="https://img.shields.io/badge/License-MIT-blue.svg" />
+        </a>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="panel">
+        <h2 style="margin:0 0 8px 0;">Resumen</h2>
+        <p>Predicción falsable basada en la Teoría de la Cromodinámica Sincrónica (TCDS) para la fase post-perihelio del objeto interestelar <strong>3I/ATLAS</strong>.</p>
+        <ul class="list">
+          <li><strong>Asimetría fotométrica</strong>: exceso del 10–20 % frente a sublimación clásica.</li>
+          <li><strong>Corrimiento espectral no Doppler</strong>: Δλ = 2–3 Å en CN/C₂.</li>
+          <li><strong>Deriva orbital no gravitacional</strong>: 0.02–0.05 arcsec/día durante 0–100 días.</li>
+        </ul>
+        <p class="muted">KPIs Σ: <span class="kpi">LI ≥ 0.9</span>, <span class="kpi">R &gt; 0.95</span>, <span class="kpi">RMSE_SL &lt; 0.1</span>, reproducibilidad ≥ 95 %.</p>
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
+          <a class="btn" href="docs/TCDS_3I_ATLAS_POST_PERIHELIO.pdf" target="_blank" rel="noopener">
+            <span class="dot"></span> Descargar PDF
+          </a>
+          <a class="btn" href="https://doi.org/10.5281/zenodo.17560070" target="_blank" rel="noopener">
+            <span class="dot"></span> Ver en Zenodo
+          </a>
+        </div>
+      </div>
+      <div class="panel">
+        <h2 style="margin:0 0 8px 0;">Metadatos</h2>
+        <div class="card">
+          <h3>Identificadores</h3>
+          <p class="muted">DOI: <a href="https://doi.org/10.5281/zenodo.17560070" target="_blank" rel="noopener">10.5281/zenodo.17560070</a></p>
+          <p class="muted">ORCID autor: <a href="https://orcid.org/0009-0005-6358-9910" target="_blank" rel="noopener">0009-0005-6358-9910</a></p>
+        </div>
+        <div class="card">
+          <h3>Licencias</h3>
+          <p class="muted">Texto y datos: CC BY 4.0 · Código: MIT</p>
+        </div>
+        <div class="card">
+          <h3>Palabras clave</h3>
+          <p class="muted">TCDS; 3I/ATLAS; Sincronón σ; campo Σ–χ; coherencia; Σ-metrics; κΣ; asimetría fotométrica; corrimiento espectral; deriva no gravitacional; post-perihelio; predicción falsable; física interestelar; metrología de coherencia.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card col-8">
+        <h3>Descripción técnica</h3>
+        <p>El formalismo Σ–χ introduce correcciones efectivas sobre tasas de pérdida de masa y presión radiativa. Se predicen: (i) exceso fotométrico post-perihelio, (ii) Δλ no Doppler en CN/C₂ y (iii) residuales angulares acumulados por deriva negativa en <em>A₁</em>. Cada canal define criterios de éxito/falsación y métricas Σ para reproducibilidad.</p>
+      </div>
+      <div class="card col-4">
+        <h3>Citar</h3>
+        <p class="muted"><strong>APA-7:</strong><br/>
+          Carrasco Ozuna, G. (2025). <em>TCDS — Predicción post-perihelio para 3I/ATLAS</em>. Zenodo. https://doi.org/10.5281/zenodo.17560070
+        </p>
+        <p class="muted"><strong>BibTeX:</strong></p>
+        <pre><code>@misc{CarrascoOzuna_3IATLAS_2025,
+  author={Genaro Carrasco Ozuna},
+  title={TCDS --- Predicción post-perihelio para 3I/ATLAS},
+  year={2025},
+  doi={10.5281/zenodo.17560070},
+  url={https://doi.org/10.5281/zenodo.17560070},
+  publisher={Zenodo},
+  note={CC BY 4.0}
+}</code></pre>
+      </div>
+    </section>
+
+    <footer>
+      © 2025 Genaro Carrasco Ozuna · Proyecto TCDS / MSL (México) ·
+      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a> ·
+      <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MIT</a>
+    </footer>
+  </div>
+</body>
+</html>
